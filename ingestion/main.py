@@ -10,7 +10,6 @@ import json
 
 # GET ENV VARS
 bucket_name = os.environ["BUCKET_NAME"]
-file_name_sufix = os.environ["FILE_NAME_SUFIX"]
 dataset_name = os.environ["DATASET_NAME"]
 table_name = os.environ["TABLE_NAME"]
 credentials = os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
@@ -21,7 +20,7 @@ storage_client = storage.Client(project=project_id)
 bq_client = bigquery.Client(project=project_id)
 
 
-def get_json_data(bucket_name:str, file_name_sufix:str, filter_date:datetime, full_load:str = False) -> List[str]:
+def get_json_data(bucket_name:str, filter_date:str, full_load:str = False) -> List[str]:
 
     bucket = storage_client.bucket(bucket_name)
     blobs_list = []
@@ -31,7 +30,6 @@ def get_json_data(bucket_name:str, file_name_sufix:str, filter_date:datetime, fu
         blobs_list = bucket.list_blobs()
 
     else:
-        print(filter_date)
         blobs_list = bucket.list_blobs(prefix=filter_date)
     
     for blob in blobs_list:
@@ -94,17 +92,30 @@ def insert_data(data:List[str], dataset_name:str, table_name:str) -> Tuple[bool,
     return (len(errors) == 0, errors)
 
 
-def main(_: Request) -> Response:
+def main(request: Request) -> Response:
+
+    # GET REQUESTS
+    request_json = request.get_json() if request else []
+    filter_date = request_json['filter_date'] if 'filter_date' in request_json else datetime.now().strftime('%Y-%m-%d')
+    full_load = request_json['full_load'] if 'full_load' in request_json else False
+
+    print('filter_date', filter_date, 'full_load', full_load)
+
+    list_json_data = get_json_data(bucket_name, filter_date, full_load)
+
+    if len(list_json_data) > 0:
+        response, errors = insert_data(list_json_data, dataset_name, table_name)
+        
+        if response:
+            print(f'Loaded row(s) into {dataset_name}.{table_name} table.')
+            return Response(status=200)
+        else:
+            print(f'Encountered errors while inserting rows: {errors}')
+            return Response(status=400)
     
-    list_json_data = get_json_data(bucket_name, file_name_sufix, datetime.now(), True)
-    response, errors = insert_data(list_json_data, dataset_name, table_name)
-
-    if response:
-        print(f'Loaded row(s) into {dataset_name}.{table_name} table.')
-        return Response(status=200)
-
-    print(f'Encountered errors while inserting rows: {errors}')
-    return Response(status=400)
+    else:
+        print(f'No found row(s) to load into {dataset_name}.{table_name} table.')
+        return Response(status=404)
 
 
 if __name__ == "__main__":
