@@ -12,7 +12,6 @@ import json
 bucket_name = os.environ["BUCKET_NAME"]
 dataset_name = os.environ["DATASET_NAME"]
 table_name = os.environ["TABLE_NAME"]
-credentials = os.environ["GOOGLE_APPLICATION_CREDENTIALS"]
 project_id = os.environ["PROJECT_ID"]
 
 # DEFINE CLIENTS
