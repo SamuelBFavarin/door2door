@@ -2,6 +2,7 @@ version: 2
 
 sources:
   - name: bronze
+    schema: bronze
     description: "This dataset contains all raw sources "
     database: door2door-381302
     tables:

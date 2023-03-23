@@ -1,6 +1,6 @@
 FROM python:3.10.9-slim
 
-LABEL door2door
+LABEL Pipeline door2door
 
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -23,7 +23,7 @@ ENV POETRY_VERSION=1.3.2
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
 WORKDIR $PYSETUP_PATH
-#COPY ./poetry.lock ./pyproject.toml ./
+COPY ./pyproject.toml ./
 RUN poetry install --extras dbt
 
 COPY ./docker-entrypoint.sh /docker-entrypoint.sh

@@ -10,5 +10,5 @@ SELECT
     data.location.lat AS latitude,
     data.location.lng AS longitude,    	
     data.location.at AS created_at
-FROM source('bronze', 'api_events')
+FROM {{ source('bronze', 'api_events') }}
 WHERE event = "update"

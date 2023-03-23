@@ -23,8 +23,6 @@ models:
         relation: true
     door2door_core:
         +required_docs: true
-        bronze:
-            +schema: bronze
         silver:
             +schema: silver
         gold:

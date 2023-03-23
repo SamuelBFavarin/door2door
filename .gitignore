@@ -1,3 +1,15 @@
+# local bucket data
 bucket/*
+
+# local credentials
 credentials/*
+
+# python virtual env
 ingestion/env/*
+
+# dbt files
+transformation/.*
+transformation/logs/*
+transformation/dbt_packages/*
+transformation/target/*
+transformation/profiles.local.yml
