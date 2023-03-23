@@ -1,0 +1,29 @@
+name: "door2door_core"
+version: "1.0.0"
+config-version: 2
+
+profile: "door2door_dbt"
+
+# Paths for file types
+analysis-paths: ["analysis"]
+macro-paths: ["macros"]
+model-paths: ["models"]
+seed-paths: ["data"]
+snapshot-paths: ["snapshots"]
+target-path: "target"
+test-paths: ["tests"]
+
+# clean folders
+clean-targets: ["dbt_packages", "logs", "target"]
+
+# models structure
+models:
+    +persist_docs:
+        columns: true
+        relation: true
+    door2door_core:
+        +required_docs: true
+        silver:
+            +schema: silver
+        gold:
+            +schema: gold
