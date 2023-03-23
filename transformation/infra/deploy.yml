@@ -12,12 +12,11 @@ steps:
 
     - name: gcr.io/cloud-builders/docker
       entrypoint: 'bash'
-      args:
-        - "run"
-        - "--network=cloudbuild"
-        - "-t"
-        - "${_IMAGE_URI}"
-        - "dbt build --select tag:daily"
+      args: ["-c", "ls"]
+
+    - name: gcr.io/cloud-builders/docker
+      entrypoint: 'bash'
+      args: ["-c", "docker run --network=cloudbuild -t ${_IMAGE_URI} dbt build --select tag:daily"]
 
 timeout: 1800s
 images:
