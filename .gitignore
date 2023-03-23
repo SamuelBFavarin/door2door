@@ -7,6 +7,9 @@ credentials/*
 # python virtual env
 ingestion/env/*
 
+# makefile execution
+.container_bash_history
+
 # dbt files
 transformation/.*
 transformation/logs/*
