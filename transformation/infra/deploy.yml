@@ -30,6 +30,6 @@ options:
     logging: CLOUD_LOGGING_ONLY
 substitutions:
     _GCR_HOSTNAME: gcr.io
-    _IMAGE_URI: "us-east4-docker.pkg.dev/door2door-381302/door2door-dbt:latest"
+    _IMAGE_URI: "southamerica-east1-docker.pkg.dev/door2door-381302/dbt-door-2-door:latest"
     _SERVICE_NAME: door2door-elt
     _SERVICE_ACCOUNT: door2door-381302@appspot.gserviceaccount.com
