@@ -1,0 +1,15 @@
+# For more information on how to configure this file, please see:
+# https://docs.getdbt.com/docs/profile
+
+door2door_dbt: # this needs to match the profile: in your dbt_project.yml file
+    target: prod
+    outputs:
+        prod:
+            type: bigquery
+            method: oauth
+            project: "{{ env_var('DBT_PROJECT') }}"
+            dataset: "{{ env_var('DBT_DEFAULT_DATASET') }}"
+            threads: 4
+            timeout_seconds: 600
+            location: us-east4
+            priority: interactive

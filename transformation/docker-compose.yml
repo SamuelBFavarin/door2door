@@ -1,0 +1,18 @@
+version: "3.1"
+services:
+    door2door_core:
+        container_name: door2door_core
+        image: door2door_core:prod
+        profiles: ["dbt"]
+        ports:
+            - "9444:8080"
+        volumes:
+            - ./:/app:delegated
+            # The below volume stores your container's bash history between container runs
+            - ./.container_bash_history:/root/.bash_history
+            - $HOME/.config/gcloud/application_default_credentials.json:/root/.config/gcloud/application_default_credentials.json:ro
+        environment:
+            - ENV_NAME=prod
+            - DBT_PROJECT=door2door-381302
+            - DBT_DEFAULT_DATASET=silver
+            - DBT_PROFILES_DIR=/app/

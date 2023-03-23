@@ -1,0 +1,27 @@
+version: 2
+
+models:
+  - name: vehicle_update_events
+    description: This table contains all update events of vehicles
+    columns:
+      - name: event_id
+        description: Uniquely identifies a event
+        tests:
+          - not_null
+          - unique
+      - name: organization_id
+        description: Uniquely identifies a event organization
+        tests:
+          - not_null
+      - name: latitude
+        description: Vehicle latitude
+        tests:
+          - not_null
+      - name: longitude
+        description: Vehicle longitude
+        tests:
+          - not_null
+      - name: created_at
+        description: Event date
+        tests:
+          - not_null
