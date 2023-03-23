@@ -13,8 +13,6 @@ steps:
     - name: gcr.io/cloud-builders/docker
       entrypoint: 'bash'
       args:
-        - "-c"
-        - "docker"
         - "run"
         - "--network=cloudbuild"
         - "-t"
