@@ -1,1 +1,3 @@
 bucket/*
+credentials/*
+ingestion/env/*
