@@ -14,5 +14,5 @@ services:
         environment:
             - ENV_NAME=prod
             - DBT_PROJECT=door2door-381302
-            - DBT_DEFAULT_DATASET=silver
+            - DBT_DEFAULT_DATASET=default
             - DBT_PROFILES_DIR=/app/

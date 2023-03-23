@@ -20,6 +20,7 @@ steps:
         - "${_IMAGE_URI}" 
         - "--file=./Dockerfile"
         - "."
+        - "dbt run --select tag:daily && dbt test --select tag:daily && dbt docs generate"
 
 timeout: 1800s
 images:

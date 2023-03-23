@@ -16,7 +16,7 @@ ENV PYTHONUNBUFFERED=1 \
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y curl gcc git jq\
+    && apt-get install --no-install-recommends -y curl gcc git\
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 ENV POETRY_VERSION=1.3.2
@@ -32,14 +32,4 @@ RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT /docker-entrypoint.sh $0 $@
 
 WORKDIR /app
-
-ENV ENV_NAME=prod
-ENV DBT_PROJECT=door2door-381302
-ENV DBT_DEFAULT_DATASET=default
-ENV DBT_PROFILES_DIR=./
-
 COPY . /app/
-
-
-#RUN chmod +x ./ci/run_ci.sh 
-#ENTRYPOINT ./ci/run_ci.sh
