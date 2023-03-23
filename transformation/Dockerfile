@@ -23,10 +23,10 @@ ENV POETRY_VERSION=1.3.2
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
 WORKDIR $PYSETUP_PATH
-COPY ./pyproject.toml ./
+COPY ./transformation/poetry.lock ./transformation/pyproject.toml ./
 RUN poetry install --extras dbt
 
-COPY ./docker-entrypoint.sh /docker-entrypoint.sh
+COPY ./transformation/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT /docker-entrypoint.sh $0 $@
