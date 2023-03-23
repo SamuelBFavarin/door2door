@@ -11,7 +11,11 @@ ENV PYTHONUNBUFFERED=1 \
     POETRY_VIRTUALENVS_IN_PROJECT=true \
     POETRY_NO_INTERACTION=1 \
     PYSETUP_PATH="/opt/pysetup" \
-    VENV_PATH="/opt/pysetup/.venv"
+    VENV_PATH="/opt/pysetup/.venv"\
+    ENV_NAME="prod"\
+    DBT_PROJECT="door2door-381302"\
+    DBT_DEFAULT_DATASET="default"\
+    DBT_PROFILES_DIR="/app/"
 
 ENV PATH="$POETRY_HOME/bin:$VENV_PATH/bin:$PATH"
 
@@ -32,4 +36,5 @@ RUN chmod +x /docker-entrypoint.sh
 ENTRYPOINT /docker-entrypoint.sh $0 $@
 
 WORKDIR /app
-COPY . /app/
+COPY ./transformation /app/
+RUN dbt deps

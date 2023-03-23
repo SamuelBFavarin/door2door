@@ -19,8 +19,7 @@ steps:
         - "--network=cloudbuild"
         - "-t"
         - "${_IMAGE_URI}"
-        - "--file=./transformation/Dockerfile"
-        - "dbt run --select tag:daily && dbt test --select tag:daily && dbt docs generate"
+        - "dbt build --select tag:daily"
 
 timeout: 1800s
 images:
