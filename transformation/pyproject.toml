@@ -2,7 +2,7 @@
 name = "door2door-elt"
 version = "0.1.0"
 description = "dbt Project for the Door2door ELT Pipeline"
-authors = ["sreeladas <favarin.dev@gmail.com>"]
+authors = ["samuel <favarin.dev@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = ">=3.8,<3.11"
@@ -10,34 +10,16 @@ dbt-bigquery = {version = "^1.3.0", optional = true}
 re-data = {version = "^0.10.1", optional = true}
 psycopg = {version = "^3.0.16", optional = true}
 python-dotenv = {version = "^0.19.2", optional = true}
-setuptools = {version = "^63.4.2", optional = true}
+setuptools = {version = "^67.4.0", optional = true}
 typer = {version = "^0.4.1", optional = true}
-
-cookiecutter = {version = "^2.1.1", optional = true}
-google-cloud-monitoring = {version = "^2.11.1", optional = true}
-streamlit = {version = "^1.12.0", optional = true}
-streamlit-aggrid = {version = "^0.3.2", optional = true}
-
-[tool.poetry.dev-dependencies]
-pre-commit = "^2.15.0"
-sqlfluff-templater-dbt = "^0.12.0"
-flake8 = "^4.0.1"
-black = "^22.1.0"
 
 [tool.poetry.extras]
 dbt = [
     "dbt-bigquery",
     "re-data"
 ]
-cookiecutter = [
-    "cookiecutter"
-]
+
 [build-system]
 requires = ["setuptools", "poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.black]
-line-length = 120
-target-version = ['py310']
-include = '\.pyi?$'
-skip-magic-trailing-comma = true
