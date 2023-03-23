@@ -5,7 +5,7 @@ steps:
         - "--destination=${_IMAGE_URI}"
         - "--cache=true"
         - "--cache-ttl=504h"
-        - "--dockerfile=./Dockerfile"
+        - "--dockerfile=./transformation/Dockerfile"
       timeout: 1200s
       id: Build and push image
 
@@ -18,7 +18,7 @@ steps:
         - "--network=cloudbuild"
         - "-t" 
         - "${_IMAGE_URI}" 
-        - "--file=./Dockerfile"
+        - "--file=./transformation/Dockerfile"
         - "."
         - "dbt run --select tag:daily && dbt test --select tag:daily && dbt docs generate"
 
