@@ -6,20 +6,16 @@ steps:
         - "--cache=true"
         - "--cache-ttl=504h"
         - "--dockerfile=./transformation/Dockerfile"
+        - "--verbosity=debug"
       timeout: 1200s
       id: Build and push image
 
     - name: gcr.io/cloud-builders/docker
       entrypoint: 'bash'
-      args: 
-        - "-c" 
-        - "docker" 
-        - "run" 
+      args:
+        - "run"
         - "--network=cloudbuild"
-        - "-t" 
-        - "${_IMAGE_URI}" 
-        - "--file=./transformation/Dockerfile"
-        - "."
+        - "${_IMAGE_URI}"
         - "dbt run --select tag:daily && dbt test --select tag:daily && dbt docs generate"
 
 timeout: 1800s
@@ -30,6 +26,6 @@ options:
     logging: CLOUD_LOGGING_ONLY
 substitutions:
     _GCR_HOSTNAME: gcr.io
-    _IMAGE_URI: "gcr.io/door2door-381302/dbt-app:v1.0.0"
+    _IMAGE_URI: "gcr.io/door2door-381302/dbt-app:latest"
     _SERVICE_NAME: door2door-elt
     _SERVICE_ACCOUNT: door2door-381302@appspot.gserviceaccount.com
