@@ -1,0 +1,47 @@
+version: 2
+
+models:
+  - name: vehicle_events
+    description: This table contains all events of vehicles.
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          combination_of_columns:
+            - event_id
+            - event_created_at
+    columns:
+      - name: event_id
+        description: Identifies a event
+        tests:
+          - not_null
+      - name: organization_id
+        description: Identifies a event organization
+        tests:
+          - not_null
+      - name: event_type
+        description: indicates the type of event on the Vehicle
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['deregister', 'register', 'update']
+      - name: latitude
+        description: Vehicle latitude
+        tests:
+          - not_null:
+              config:
+                  where: "event_type = 'update'"
+      - name: longitude
+        description: Vehicle longitude
+        tests:
+          - not_null:
+              config:
+                  where: "event_type = 'update'"
+      - name: location_updated_at
+        description: Data of location updated
+        tests:
+          - not_null:
+              config:
+                  where: "event_type = 'update'"
+      - name: event_created_at
+        description: Data of event created
+        tests:
+          - not_null

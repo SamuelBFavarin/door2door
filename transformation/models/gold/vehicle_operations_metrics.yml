@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: vehicle_operations_metrics
+    description: This table contains all vehicles metrics for operation periods.
+    columns:
+      - name: sk_vehicle_ops_metrics
+        description: Unique sk to identifies the vehicle-ops
+        tests:
+          - not_null
+          - unique
+      - name: vehicle_id
+        description: Identifies a vehicle
+        tests:
+          - not_null
+      - name: operating_period_id
+        description: Identifies a operating period 
+        tests:
+          - not_null
+      - name: total_distance_meter
+        description: Total distance traveled by the vehicle"
+        tests:
+          - not_null
+      - name: total_vehicles_updates
+        description: Total location updates by the vehicle"
+        tests:
+          - not_null
+      - name: first_event_latitude
+        description: First latitude of the vehicle"
+        tests:
+          - not_null
+      - name: first_event_longitude
+        description: First longitude of the vehicle"
+        tests:
+          - not_null
+      - name: last_event_latitude
+        description: Last latitude of the vehicle"
+        tests:
+          - not_null
+      - name: last_event_longitude
+        description: First longitude of the vehicle"
+        tests:
+          - not_null
+      - name: vehicle_started_at
+        description: First vehicle date event"
+        tests:
+          - not_null
+      - name: vehicle_finished_at
+        description: Last vehicle date event"
+        tests:
+          - not_null
