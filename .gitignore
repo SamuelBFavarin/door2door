@@ -10,9 +10,13 @@ ingestion/env/*
 # makefile execution
 .container_bash_history
 
+# ingestion step
+ingestion/temp-sa-gcp-key.json
+
 # dbt files
 transformation/.*
 transformation/logs/*
 transformation/dbt_packages/*
 transformation/target/*
 transformation/profiles.local.yml
+transformation/temp-sa-gcp-key.json
