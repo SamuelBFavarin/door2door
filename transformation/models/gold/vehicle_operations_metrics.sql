@@ -70,17 +70,17 @@ events_distances AS (
 SELECT 
   CONCAT(
     events_distances.vehicle_id, '_', 
-    events_distances.operating_period_id)  AS sk_vehicle_ops_metrics,
-  events_distances.vehicle_id             AS vehicle_id,
-  events_distances.operating_period_id    AS operating_period_id,
-  SUM(distance_meters)                    AS total_distance_meter,
-  COUNT(1)                                AS total_vehicles_updates,
-  MIN(first_event.latitude)               AS first_event_latitude,
-  MIN(first_event.longitude)              AS first_event_longitude,
-  MIN(last_event.latitude)                AS last_event_latitude,
-  MIN(last_event.longitude)               AS last_event_longitude,
-  MIN(location_updated_at1)               AS vehicle_started_at,
-  MAX(location_updated_at1)               AS vehicle_finished_at
+    events_distances.operating_period_id)   AS sk_vehicle_ops_metrics,
+  events_distances.vehicle_id               AS vehicle_id,
+  events_distances.operating_period_id      AS operating_period_id,
+  SUM(distance_meters)                      AS total_distance_meter,
+  COUNT(1)                                  AS total_vehicles_updates,
+  MIN(first_event.latitude)                 AS first_event_latitude,
+  MIN(first_event.longitude)                AS first_event_longitude,
+  MIN(last_event.latitude)                  AS last_event_latitude,
+  MIN(last_event.longitude)                 AS last_event_longitude,
+  MIN(location_updated_at1)                 AS vehicle_started_at,
+  MAX(location_updated_at1)                 AS vehicle_finished_at
 FROM events_distances
 JOIN first_event
   ON events_distances.vehicle_id = first_event.vehicle_id
