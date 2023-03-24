@@ -1,0 +1,17 @@
+FROM python:3.10.9-slim
+
+LABEL Ingestion door2door
+
+# DEFINE ENV VARS
+ENV BUCKET_NAME="door2door_api_events" \
+    DATASET_NAME="bronze" \
+    TABLE_NAME="api_events" \
+    PROJECT_ID="door2door-381302" \
+    GOOGLE_APPLICATION_CREDENTIALS="temp-sa-gcp-key.json"
+
+WORKDIR /app
+COPY ./ingestion /app/
+
+# INSTALL REQUIRED LIBS
+RUN pip install -r requirements.txt
+ENTRYPOINT python main.py
