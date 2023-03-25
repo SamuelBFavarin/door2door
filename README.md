@@ -61,7 +61,7 @@ To run the Door2Door project locally, follow these steps:
  3. Add the Service Account Credentials in the `/credentials/sa-gcp-key.json` ;
  3. Use `Makefile` to run the ingestions and transformation steps. You need to run these comands in the repo folder!
 	- To execute the ingestion process, run `make run-ingestion`. By default, this command ingests all data from the previous day;
-	- To execution the transformation process, run `run-dbt`;
+	- To execution the transformation process, run `make run-dbt`;
 
 ## How to access the GCP Project ☁️
 
