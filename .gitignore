@@ -2,10 +2,7 @@
 bucket/*
 
 # local credentials
-credentials/*
-
-# python virtual env
-ingestion/env/*
+credentials/*.local.json
 
 # makefile execution
 .container_bash_history
